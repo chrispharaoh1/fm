@@ -67,7 +67,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-6 col-md-4 dropdown-item">
-                  <a href="fff">
+                  <a href="crops.php">
                     <i class="fas fa-seedling"></i>
                     <span>Crops</span>
                   </a>
@@ -85,7 +85,7 @@
                 </a>
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
-                <a href="fff">
+                <a href="finance.php">
                     <i class="fas fa-coins"></i>
                     <span>Finance</span>
                 </a>
