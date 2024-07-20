@@ -73,13 +73,13 @@
                   </a>
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
-                <a href="fff">
+                <a href="analysis.php">
                     <i class="fas fa-chart-line"></i>
                     <span>Analysis</span>
                 </a>
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
-                <a href="fff">
+                <a href="iventory.php">
                     <i class="fas fa-boxes"></i>
                     <span>Iventory</span>
                 </a>
