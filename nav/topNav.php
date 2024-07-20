@@ -91,15 +91,15 @@
                 </a>
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
-                <a href="fff">
+                <a href="audit.php">
                     <i class="fas fa-file-alt"></i>
                     <span>Audit logs</span>
                 </a>
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
-                <a href="fff">
-                    <i class="fas fa-user-shield"></i>
-                    <span>Security</span>
+                <a href="profile.php">
+                    <i class="fas fa-user"></i>
+                    <span>My profile</span>
                 </a>
                 </div>
             </div>
