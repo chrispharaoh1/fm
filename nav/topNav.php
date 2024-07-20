@@ -68,8 +68,8 @@
             <div class="row">
                 <div class="col-6 col-md-4 dropdown-item">
                   <a href="fff">
-                    <i class="fas fa-cogs"></i>
-                    <span>Settings</span>
+                    <i class="fas fa-seedling"></i>
+                    <span>Crops</span>
                   </a>
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
@@ -80,20 +80,20 @@
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
                 <a href="fff">
-                    <i class="fas fa-layer-group"></i>
-                    <span>App 1</span>
+                    <i class="fas fa-boxes"></i>
+                    <span>Iventory</span>
                 </a>
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
                 <a href="fff">
-                    <i class="fas fa-project-diagram"></i>
-                    <span>App 2</span>
+                    <i class="fas fa-coins"></i>
+                    <span>Finance</span>
                 </a>
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
                 <a href="fff">
-                    <i class="fas fa-toolbox"></i>
-                    <span>App 3</span>
+                    <i class="fas fa-file-alt"></i>
+                    <span>Audit logs</span>
                 </a>
                 </div>
                 <div class="col-6 col-md-4 dropdown-item">
