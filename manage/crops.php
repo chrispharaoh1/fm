@@ -1,3 +1,20 @@
+<?php
+// Database connection
+require __DIR__ . "/config.php";
+$conn = new mysqli($config["db"]["hostname"],
+$config["db"]["username"],
+$config["db"]["password"],
+$config["db"]["database"]);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch data from the database
+$sql = "SELECT crop_name, planting_date, growth_stage, farm_size, yield_prediction FROM crops";
+$result = $conn->query($sql);
+?>
 <style>
         .create-db-button {
             border: 2px dashed #ddd;
@@ -89,53 +106,47 @@
 
 <div class="card" style="width: 95%; margin-top: 20px; margin-left: auto; margin-right: auto; ">
 <div class="container mt-5">
-        <table id="example" class="table table-striped table-bordered" >
+<div class='table-responsive'>
+<table id="example" class="table table-striped table-bordered ">
             <thead>
                 <tr>
                     <th>Crop Name</th>
-                    <th>Date planted</th>
-                    <th>Growth stage</th>
-                    <th>Farm size</th>
-                    <th>Yield prediction</th>
+                    <th>Date Planted</th>
+                    <th>Growth Stage</th>
+                    <th>Farm Size</th>
+                    <th>Yield Prediction</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John Doe</td>
-                    <td>john.doe@example.com</td>
-                    <td>2023-07-20</td>
-                    <td>2023-07-20</td>
-                    <td>2023-07-20</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <i class="fas fa-ellipsis-v" data-bs-toggle="dropdown"></i>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Jane Doe</td>
-                    <td>jane.doe@example.com</td>
-                    <td>2023-07-20</td>
-                    <td>2023-07-20</td>
-                    <td>2023-07-21</td>
-                    <td>
-                        <div class="action-dropdown">
-                            <i class="fas fa-ellipsis-v" data-bs-toggle="dropdown"></i>
-                            <ul class="dropdown-menu">
-                                <li style="text-align:left;"><a class="dropdown-item" href="#" syle="mousehover:green;"><i class="fa fa-edit"></i>&#160;Edit</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa fa-trash"></i> &#160;Delete</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <!-- More rows as needed -->
+                <?php
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                                <td>{$row['crop_name']}</td>
+                                <td>{$row['planting_date']}</td>
+                                <td>{$row['growth_stage']}</td>
+                                <td>{$row['farm_size']}</td>
+                                <td>{$row['yield_prediction']}</td>
+                                <td>
+                                    <div class='action-dropdown'>
+                                        <i class='fas fa-ellipsis-v' data-bs-toggle='dropdown'></i>
+                                        <ul class='dropdown-menu'>
+                                            <li><a class='dropdown-item' href='#'><i class='fa fa-edit'></i>&#160;Edit</a></li>
+                                            <li><a class='dropdown-item' href='#'><i class='fa fa-trash'></i>&#160;Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='6'>No records found</td></tr>";
+                }
+                $conn->close();
+                ?>
             </tbody>
         </table>
+              </div>
     </div>
       </div>
 
@@ -178,31 +189,7 @@
     </div>
             </div>
         </div>
-    </div>
-
-    <div class="text-center">
-	<!-- Button HTML (to Trigger Modal) -->
-	<a href="#myModal" class="trigger-btn" data-toggle="modal"> launch</a>
-</div>
-
-<!-- Modal HTML -->
-<div id="myModal" class="modal fade">
-	<div class="modal-dialog modal-confirm">
-		<div class="modal-content">
-			<div class="modal-header justify-content-center">
-				<div class="icon-box">
-					<i class="material-icons">&#xE876;</i>
-				</div>
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body text-center">
-				<h4>Great!</h4>	
-				<p>Your account has been created successfully.</p>
-				<button class="btn btn-success" data-dismiss="modal"><span>Start Exploring</span> <i class="material-icons">&#xE5C8;</i></button>
-			</div>
-		</div>
-	</div>
-</div>     
+    </div>     
 
           <!-- /.col-md-6 -->
         </div>
