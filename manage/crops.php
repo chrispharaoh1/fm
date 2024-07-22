@@ -82,10 +82,9 @@
 <!-- 
     Table -->
 
-<div class="row">
-
+<div class="card" style="width: 95%; margin-top: 20px; margin-left: auto; margin-right: auto; ">
 <div class="container mt-5">
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <table id="example" class="table table-striped table-bordered" >
             <thead>
                 <tr>
                     <th>Name</th>
@@ -127,10 +126,7 @@
             </tbody>
         </table>
     </div>
-
-  
-
-</div>
+      </div>
 
     <!-- Modal -->
     <div class="modal fade" id="createCropModal" tabindex="-1" aria-labelledby="createCropModalLabel" aria-hidden="true">
@@ -169,7 +165,6 @@
   </aside>
   <!-- /.control-sidebar -->
 
-
   <!-- Main Footer -->
   <?php
     include '../nav/footer.php';  //Top navbar
@@ -190,9 +185,26 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard3.js"></script>
+
+<script src="../assets/js/jquery-3.7.0.js"></script>
+    <script src="../assets/js/jquery.dataTables.min.js"></script>
+
     <script src="../assets/js/jquery-3.7.0.js"></script>
     <script src="../assets/js/jquery.dataTables.min.js"></script>
     <script src="../assets/js/dataTables.bootstrap5.min.js"></script>
+
+    <script src="../assets/js/bootstrap.bundle2.min.js"></script>
+    <script>
+        document.getElementById('cropForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const cropName = document.getElementById('cropName').value;
+            alert('Crop Name: ' + cropName); // Replace this with actual save logic
+            // Close the modal
+            var myModal = new bootstrap.Modal(document.getElementById('createCropModal'));
+            myModal.hide();
+        });
+    </script>
+
 
     <script>
         $(document).ready(function() {
