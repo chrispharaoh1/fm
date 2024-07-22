@@ -156,7 +156,7 @@
                 </ul>
             </div>
         <?php } ?>
-        <form id="cropForm" method="post" action="cropAddProcess.php">
+        <form id="cropForm" method="post" action="cropAddProcess.php" style="padding-bottom: 50px;">
             <div class="mb-3">
                 <label for="cropName" class="form-label">Crop Name</label>
                 <input type="text" class="form-control" id="cropName" name="cropName" required>

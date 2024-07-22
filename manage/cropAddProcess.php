@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .checkmark-wrapper {
             display: flex;
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <h1 class="display-3">Success</h1>
         <p class="lead">One crop added successfully</p>
-        <button class="btn btn-primary" onclick="window.location.href='index.php'">Go Back</button>
+        <button class="btn btn-primary" onclick="window.location.href='crops.php'">Go Back</button>
     </div>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>
