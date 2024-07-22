@@ -10,41 +10,8 @@
             background-color: #f8f8f8;
         }
     </style>
-     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
-<?php
-  session_start();
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "crop_management";
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Add crop
-if (isset($_POST['add_crop'])) {
-    $name = $_POST['crop_name'];
-    $sql = "INSERT INTO crops (name) VALUES ('$name')";
-    $conn->query($sql);
-}
-
-// Add field
-if (isset($_POST['add_field'])) {
-    $name = $_POST['field_name'];
-    $crop_id = $_POST['crop_id'];
-    $sql = "INSERT INTO fields (name, crop_id) VALUES ('$name', $crop_id)";
-    $conn->query($sql);
-}
-
-// Fetch crops and fields
-$crops = $conn->query("SELECT * FROM crops");
-$fields = $conn->query("SELECT fields.id, fields.name, crops.name AS crop_name FROM fields JOIN crops ON fields.crop_id = crops.id");
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +46,6 @@ $fields = $conn->query("SELECT fields.id, fields.name, crops.name AS crop_name F
     include '../nav/leftNav.php';  //left Navbar
   ?>
 
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -105,10 +71,6 @@ $fields = $conn->query("SELECT fields.id, fields.name, crops.name AS crop_name F
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-           
-        
-
-
 
         <div class="container mt-5">
         <!-- Button -->
@@ -166,18 +128,9 @@ $fields = $conn->query("SELECT fields.id, fields.name, crops.name AS crop_name F
         </table>
     </div>
 
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
-    </script>
+  
 
 </div>
-
 
     <!-- Modal -->
     <div class="modal fade" id="createCropModal" tabindex="-1" aria-labelledby="createCropModalLabel" aria-hidden="true">
@@ -200,23 +153,6 @@ $fields = $conn->query("SELECT fields.id, fields.name, crops.name AS crop_name F
         </div>
     </div>
 
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.getElementById('cropForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const cropName = document.getElementById('cropName').value;
-            alert('Crop Name: ' + cropName); // Replace this with actual save logic
-            // Close the modal
-            var myModal = new bootstrap.Modal(document.getElementById('createCropModal'));
-            myModal.hide();
-        });
-    </script>
-
-
-
-
-
           <!-- /.col-md-6 -->
         </div>
         <!-- /.row -->
@@ -232,21 +168,6 @@ $fields = $conn->query("SELECT fields.id, fields.name, crops.name AS crop_name F
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   <!-- Main Footer -->
@@ -269,5 +190,14 @@ $fields = $conn->query("SELECT fields.id, fields.name, crops.name AS crop_name F
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard3.js"></script>
+    <script src="../assets/js/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
 </body>
 </html>
