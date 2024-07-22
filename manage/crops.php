@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch data from the database
-$sql = "SELECT crop_name, planting_date, growth_stage, farm_size, yield_prediction FROM crops";
+$sql = "SELECT crop_name, planting_date, growth_stage, farm_size, yield_prediction, id FROM crops";
 $result = $conn->query($sql);
 ?>
 <style>
@@ -132,8 +132,8 @@ $result = $conn->query($sql);
                                     <div class='action-dropdown'>
                                         <i class='fas fa-ellipsis-v' data-bs-toggle='dropdown'></i>
                                         <ul class='dropdown-menu'>
-                                            <li><a class='dropdown-item' href='#'><i class='fa fa-edit'></i>&#160;Edit</a></li>
-                                            <li><a class='dropdown-item' href='#'><i class='fa fa-trash'></i>&#160;Delete</a></li>
+                                            <li><a class='dropdown-item' href='cropEdit.php?id={$row['id']}'><i class='fa fa-edit'></i>&#160;Edit</a></li>
+                                            <li><a class='dropdown-item' href='cropDelete.php?id={$row['id']}'><i class='fa fa-trash'></i>&#160;Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
