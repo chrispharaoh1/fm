@@ -87,9 +87,11 @@
         <table id="example" class="table table-striped table-bordered" >
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Register Date</th>
+                    <th>Crop Name</th>
+                    <th>Date planted</th>
+                    <th>Growth stage</th>
+                    <th>Farm size</th>
+                    <th>Yield prediction</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -97,6 +99,8 @@
                 <tr>
                     <td>John Doe</td>
                     <td>john.doe@example.com</td>
+                    <td>2023-07-20</td>
+                    <td>2023-07-20</td>
                     <td>2023-07-20</td>
                     <td>
                         <div class="action-dropdown">
@@ -111,6 +115,8 @@
                 <tr>
                     <td>Jane Doe</td>
                     <td>jane.doe@example.com</td>
+                    <td>2023-07-20</td>
+                    <td>2023-07-20</td>
                     <td>2023-07-21</td>
                     <td>
                         <div class="action-dropdown">
@@ -137,10 +143,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="cropForm">
+                    <form id="cropForm" method="post" action="cropAddProcess.php">
                         <div class="mb-3">
                             <label for="cropName" class="form-label">Crop Name</label>
-                            <input type="text" class="form-control" id="cropName" required>
+                            <input type="text" class="form-control" id="cropName" name="cropName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cropName" class="form-label">Date planted</label>
+                            <input type="date" class="form-control" id="datePlanted" name="datePlanted" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cropName" class="form-label">Growth stage</label>
+                            <input type="text" class="form-control" id="growth" name="growth" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cropName" class="form-label">Farm size (Total area in meters)</label>
+                            <input type="number" class="form-control" id="farm" name="farmsize" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
