@@ -1,6 +1,6 @@
-CREATE DATABASE crop_management;
+CREATE DATABASE farm_management;
 
-USE crop_management;
+USE farm_management;
 
 CREATE TABLE crops (
     id INT AUTO_INCREMENT PRIMARY KEY,

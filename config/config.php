@@ -4,7 +4,7 @@
             "hostname" => "localhost",
             "username" => "root",
             "password" => "",
-            "database" => "profile"
+            "database" => "farm_management"
         ]
     ];
 ?>
