@@ -9,6 +9,11 @@
         .create-db-button:hover {
             background-color: #f8f8f8;
         }
+
+        
+        .error {
+            color: red;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 
@@ -122,8 +127,8 @@
                         <div class="action-dropdown">
                             <i class="fas fa-ellipsis-v" data-bs-toggle="dropdown"></i>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                <li style="text-align:left;"><a class="dropdown-item" href="#" syle="mousehover:green;"><i class="fa fa-edit"></i>&#160;Edit</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fa fa fa-trash"></i> &#160;Delete</a></li>
                             </ul>
                         </div>
                     </td>
@@ -142,27 +147,35 @@
                     <h5 class="modal-title" id="createCropModalLabel">Add New Crop</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="cropForm" method="post" action="cropAddProcess.php">
-                        <div class="mb-3">
-                            <label for="cropName" class="form-label">Crop Name</label>
-                            <input type="text" class="form-control" id="cropName" name="cropName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cropName" class="form-label">Date planted</label>
-                            <input type="date" class="form-control" id="datePlanted" name="datePlanted" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cropName" class="form-label">Growth stage</label>
-                            <input type="text" class="form-control" id="growth" name="growth" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cropName" class="form-label">Farm size (Total area in meters)</label>
-                            <input type="number" class="form-control" id="farm" name="farmsize" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
-                </div>
+                <div class="container mt-5">
+        <?php if (isset($message)) { echo '<div class="alert alert-success">' . $message . '</div>'; } ?>
+        <?php if (isset($errors) && count($errors) > 0) { ?>
+            <div class="alert alert-danger">
+                <ul>
+                    <?php foreach ($errors as $error) { echo '<li>' . $error . '</li>'; } ?>
+                </ul>
+            </div>
+        <?php } ?>
+        <form id="cropForm" method="post" action="cropAddProcess.php">
+            <div class="mb-3">
+                <label for="cropName" class="form-label">Crop Name</label>
+                <input type="text" class="form-control" id="cropName" name="cropName" required>
+            </div>
+            <div class="mb-3">
+                <label for="datePlanted" class="form-label">Date Planted</label>
+                <input type="date" class="form-control" id="datePlanted" name="datePlanted" required>
+            </div>
+            <div class="mb-3">
+                <label for="growth" class="form-label">Growth Stage</label>
+                <input type="text" class="form-control" id="growth" name="growth" required>
+            </div>
+            <div class="mb-3">
+                <label for="farm" class="form-label">Farm Size (Total area in meters)</label>
+                <input type="number" class="form-control" id="farm" name="farmsize" required>
+            </div>
+            <button type="submit" class="btn btn-primary">+ &#160; Save</button>
+        </form>
+    </div>
             </div>
         </div>
     </div>
@@ -212,7 +225,7 @@
     <script src="../assets/js/dataTables.bootstrap5.min.js"></script>
 
     <script src="../assets/js/bootstrap.bundle2.min.js"></script>
-    <script>
+    <!-- <script>
         document.getElementById('cropForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const cropName = document.getElementById('cropName').value;
@@ -221,7 +234,7 @@
             var myModal = new bootstrap.Modal(document.getElementById('createCropModal'));
             myModal.hide();
         });
-    </script>
+    </script> -->
 
 
     <script>
@@ -229,5 +242,6 @@
             $('#example').DataTable();
         });
     </script>
+
 </body>
 </html>
