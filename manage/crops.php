@@ -146,10 +146,10 @@ $result = $conn->query($sql);
                 ?>
             </tbody>
         </table>
-              </div>
+     </div>
     </div>
-      </div>
-
+  </div>
+      
     <!-- Modal -->
     <div class="modal fade" id="createCropModal" tabindex="-1" aria-labelledby="createCropModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -188,9 +188,10 @@ $result = $conn->query($sql);
         </form>
     </div>
             </div>
-        </div>
-    </div>     
-
+        
+            </div>
+            
+            
           <!-- /.col-md-6 -->
         </div>
         <!-- /.row -->
@@ -200,7 +201,7 @@ $result = $conn->query($sql);
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
+ 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
