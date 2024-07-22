@@ -44,7 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("sssi", $cropName, $datePlanted, $growthStage, $farmSize);
 
         if ($stmt->execute()) {
-            $message = "New record created successfully";
+          
+    
         } else {
             $errors[] = "Error: " . $stmt->error;
         }
@@ -54,7 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,23 +62,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .error {
-            color: red;
+        .checkmark-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10%;
+        }
+        
+        .checkmark-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: popCircle 0.6s ease-in-out forwards;
+        }
+        
+        .checkmark {
+            width: 50px;
+            height: 50px;
+            border: solid #fff;
+            border-width: 0 6px 6px 0;
+            transform: rotate(45deg);
+            animation: drawCheck 0.5s ease-in-out 0.6s forwards;
+        }
+        
+        @keyframes popCircle {
+            0% {
+                transform: scale(0);
+            }
+            80% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes drawCheck {
+            0% {
+                width: 0;
+                height: 0;
+            }
+            100% {
+                width: 25px;
+                height: 50px;
+            }
         }
     </style>
-    <title>Add Crop</title>
+    <title>Success</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <?php if ($message) { echo '<div class="alert alert-success">' . $message . '</div>'; } ?>
-        <?php if (!empty($errors)) { ?>
-            <div class="alert alert-danger">
-                <ul>
-                    <?php foreach ($errors as $error) { echo '<li>' . $error . '</li>'; } ?>
-                </ul>
+    <div class="container text-center">
+        <div class="checkmark-wrapper">
+            <div class="checkmark-circle">
+                <div class="checkmark"></div>
             </div>
-        <?php } ?>
-        <form id="cropForm" method="post" action="cropAddProcess.php">
-            <div class="mb-3">
-                <label for="cropName" class="form-label">Crop Name</label>
-                <input type="text" class="form-control"
+        </div>
+        <h1 class="display-3">Success</h1>
+        <p class="lead">One crop added successfully</p>
+        <button class="btn btn-primary" onclick="window.location.href='index.php'">Go Back</button>
+    </div>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
