@@ -24,10 +24,10 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="" class="nav-link">My profile Job portal</a>
+        <!-- <a href="" class="nav-link">My profile Job portal</a> -->
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Need help?</a>
+        <!-- <a href="#" class="nav-link">Need help?</a> -->
       </li>
     </ul>
 
