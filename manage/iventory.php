@@ -8,14 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home</title>
 
-  <!-- Google Font: Source Sans Pro -->
-
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
   <!-- IonIcons -->
   <link rel="stylesheet" href="ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+</head>
 </head>
 <!--
 `body` tag options:
@@ -62,6 +61,143 @@
       <div class="container-fluid">
         <div class="row">
 
+
+
+
+
+
+
+
+        <div class="container mt-5">
+    <h2>Inventory Management</h2>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventoryModal">
+        Add New Item
+    </button>
+
+    <table id="inventoryTable" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Item Type</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Low Inventory Threshold</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be populated here by PHP -->
+            <?php
+            // Database connection
+            $conn = new mysqli('localhost', 'root', '', 'farm_management');
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            $result = $conn->query("SELECT * FROM inventory");
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>
+                        <td>{$row['item_type']}</td>
+                        <td>{$row['item_name']}</td>
+                        <td>{$row['quantity']}</td>
+                        <td>{$row['unit']}</td>
+                        <td>{$row['low_inventory_threshold']}</td>
+                        <td>
+                            <button class='btn btn-warning btn-sm edit-btn'>Edit</button>
+                            <button class='btn btn-danger btn-sm delete-btn'>Delete</button>
+                        </td>
+                      </tr>";
+            }
+
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addInventoryModal" tabindex="-1" aria-labelledby="addInventoryModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="inventoryForm" method="post" action="inventoryAddProcess.php">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addInventoryModalLabel">Add New Inventory Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="itemType" class="form-label">Item Type</label>
+                        <select class="form-control" id="itemType" name="itemType" required>
+                            <option value="seed">Seed</option>
+                            <option value="fertilizer">Fertilizer</option>
+                            <option value="pesticide">Pesticide</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="itemName" class="form-label">Item Name</label>
+                        <input type="text" class="form-control" id="itemName" name="itemName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="unit" class="form-label">Unit</label>
+                        <input type="text" class="form-control" id="unit" name="unit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lowInventoryThreshold" class="form-label">Low Inventory Threshold</label>
+                        <input type="number" class="form-control" id="lowInventoryThreshold" name="lowInventoryThreshold" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+    $('#inventoryTable').DataTable();
+
+    $('#inventoryForm').on('submit', function(event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: 'inventoryAddProcess.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(data) {
+                $('#addInventoryModal').modal('hide');
+                location.reload(); // Reload the page to see the new data in the table
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr);
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <!-- /.col-md-6 -->
         </div>
         <!-- /.row -->
@@ -98,5 +234,14 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard3.js"></script>
+
+<script src="../assets/js/jquery-3.7.0.js"></script>
+    <script src="../assets/js/jquery.dataTables.min.js"></script>
+
+    <script src="../assets/js/jquery-3.7.0.js"></script>
+    <script src="../assets/js/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/dataTables.bootstrap5.min.js"></script>
+
+    <script src="../assets/js/bootstrap.bundle2.min.js"></script>
 </body>
 </html>
