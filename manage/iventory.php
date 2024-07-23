@@ -61,19 +61,12 @@
       <div class="container-fluid">
         <div class="row">
 
-
-
-
-
-
-
-
         <div class="container mt-5">
     <h2>Inventory Management</h2>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventoryModal">
+    <button type="button" style="margin-bottom: 30px;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventoryModal">
         Add New Item
     </button>
-
+    <div class='table-responsive'>
     <table id="inventoryTable" class="table table-striped table-bordered">
         <thead>
             <tr>
@@ -103,8 +96,7 @@
                         <td>{$row['unit']}</td>
                         <td>{$row['low_inventory_threshold']}</td>
                         <td>
-                            <button class='btn btn-warning btn-sm edit-btn'>Edit</button>
-                            <button class='btn btn-danger btn-sm delete-btn'>Delete</button>
+                            <a  href='iventoryDelete.php?id={$row['id']}' class='btn btn-danger btn-sm delete-btn'>Delete</a>
                         </td>
                       </tr>";
             }
@@ -114,7 +106,7 @@
         </tbody>
     </table>
 </div>
-
+</div>
 <!-- Modal -->
 <div class="modal fade" id="addInventoryModal" tabindex="-1" aria-labelledby="addInventoryModalLabel" aria-hidden="true">
 
@@ -160,7 +152,6 @@
     </div>
 </div>
 
-
 <script>
 $(document).ready(function() {
     $('#inventoryTable').DataTable();
@@ -185,18 +176,11 @@ $(document).ready(function() {
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    <script>
+        $(document).ready(function() {
+            $('#inventoryTable').DataTable();
+        });
+    </script>
 
           <!-- /.col-md-6 -->
         </div>

@@ -107,7 +107,7 @@ $result = $conn->query($sql);
 <div class="card" style="width: 95%; margin-top: 20px; margin-left: auto; margin-right: auto; ">
 <div class="container mt-5">
 <div class='table-responsive'>
-<table id="example" class="table table-striped table-bordered ">
+<table id="table" class="table table-striped table-bordered ">
             <thead>
                 <tr>
                     <th>Crop Name</th>
@@ -251,7 +251,7 @@ $result = $conn->query($sql);
 
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('#table').DataTable();
         });
     </script>
 
