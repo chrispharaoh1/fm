@@ -43,3 +43,28 @@ CREATE TABLE inventory_notifications (
     FOREIGN KEY (inventory_id) REFERENCES inventory(id)
 );
 
+-- Create the financial_transactions table
+CREATE TABLE financial_transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_type ENUM('expense', 'revenue') NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    category VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Create the budgets table
+CREATE TABLE budgets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    budget_name VARCHAR(255) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
