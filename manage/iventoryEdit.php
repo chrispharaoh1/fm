@@ -47,6 +47,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssddsi", $itemType, $itemName, $quantity, $threshold, $unit, $id);
 
+
+        //instering in reporting table
+        $itemId = intval($_GET['id']);
+        $AvailableQuantity = $row['quantity'];
+        //calculating used quantity
+        $enteredValue = $quantity;
+        $newValue = $enteredValue - $AvailableQuantity;
+        
+        $query = "INSERT INTO `inventory_usage`(`inventory_id`, `quantity_used`) VALUES ($itemId,'$newValue')";
+        mysqli_query($conn, $query);
+
+       $totalLeft = $newValue + $AvailableQuantity;
+
+        if($totalLeft <= $row['low_inventory_threshold']){
+            echo "Yes";
+        }
+
         if ($stmt->execute()) {
             // header("Location: success.php"); // Redirect to a success page
             
