@@ -96,7 +96,13 @@
                         <td>{$row['unit']}</td>
                         <td>{$row['low_inventory_threshold']}</td>
                         <td>
-                            <a  href='iventoryDelete.php?id={$row['id']}' class='btn btn-danger btn-sm delete-btn'>Delete</a>
+                             <div class='action-dropdown'>
+                                <i class='fas fa-ellipsis-v' data-bs-toggle='dropdown'></i>
+                                <ul class='dropdown-menu'>
+                                    <li><a class='dropdown-item edit-btn' href='#' data-id='{$row['id']}' data-item_type='{$row['item_type']}' data-item_name='{$row['item_name']}' data-quantity='{$row['quantity']}' data-unit='{$row['unit']}' data-low_inventory_threshold='{$row['low_inventory_threshold']}'><i class='fa fa-edit'></i>&#160;Edit</a></li>
+                                    <li><a class='dropdown-item' href='inventoryDelete.php?id={$row['id']}'><i class='fa fa-trash'></i>&#160;Delete</a></li>
+                                </ul>
+                            </div>
                         </td>
                       </tr>";
             }
@@ -106,6 +112,7 @@
         </tbody>
     </table>
 </div>
+
 </div>
 <!-- Modal -->
 <div class="modal fade" id="addInventoryModal" tabindex="-1" aria-labelledby="addInventoryModalLabel" aria-hidden="true">
@@ -152,35 +159,55 @@
     </div>
 </div>
 
-<script>
-$(document).ready(function() {
-    $('#inventoryTable').DataTable();
-
-    $('#inventoryForm').on('submit', function(event) {
-        event.preventDefault();
-
-        $.ajax({
-            url: 'inventoryAddProcess.php',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function(data) {
-                $('#addInventoryModal').modal('hide');
-                location.reload(); // Reload the page to see the new data in the table
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr);
-            }
-        });
-    });
-});
-</script>
 
 
-    <script>
-        $(document).ready(function() {
-            $('#inventoryTable').DataTable();
-        });
-    </script>
+
+<!-- Edit Inventory Modal -->
+<div class="modal fade" id="editInventoryModal" tabindex="-1" aria-labelledby="editInventoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="editInventoryForm" method="post" action="inventoryEditProcess.php">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editInventoryModalLabel">Edit Inventory Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editItemId" name="id">
+                    <div class="mb-3">
+                        <label for="editItemType" class="form-label">Item Type</label>
+                        <select class="form-control" id="editItemType" name="itemType" required>
+                            <option value="seed">Seed</option>
+                            <option value="fertilizer">Fertilizer</option>
+                            <option value="pesticide">Pesticide</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editItemName" class="form-label">Item Name</label>
+                        <input type="text" class="form-control" id="editItemName" name="itemName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editQuantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="editQuantity" name="quantity" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editUnit" class="form-label">Unit</label>
+                        <input type="text" class="form-control" id="editUnit" name="unit" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editLowInventoryThreshold" class="form-label">Low Inventory Threshold</label>
+                        <input type="number" class="form-control" id="editLowInventoryThreshold" name="lowInventoryThreshold" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
           <!-- /.col-md-6 -->
         </div>
