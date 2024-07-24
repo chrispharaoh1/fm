@@ -60,8 +60,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
 
        $totalLeft = $newValue + $AvailableQuantity;
 
+       //notfication
         if($totalLeft <= $row['low_inventory_threshold']){
-            echo "Yes";
+
+            $message = "Alert! ".$itemName." is less than the required threshold of ".$threshold." ".$unit ;
+            $queryNot = "INSERT INTO `inventory_notifications`(`inventory_id`, `message`) VALUES ('$itemId','$message')";
+            mysqli_query($conn, $queryNot);
         }
 
         if ($stmt->execute()) {
@@ -96,7 +100,7 @@ $conn->close();
             color: red;
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+
 
 <!DOCTYPE html>
 <html lang="en">
