@@ -99,7 +99,7 @@
                              <div class='action-dropdown'>
                                 <i class='fas fa-ellipsis-v' data-bs-toggle='dropdown'></i>
                                 <ul class='dropdown-menu'>
-                                    <li><a class='dropdown-item edit-btn' href='#' data-id='{$row['id']}' data-item_type='{$row['item_type']}' data-item_name='{$row['item_name']}' data-quantity='{$row['quantity']}' data-unit='{$row['unit']}' data-low_inventory_threshold='{$row['low_inventory_threshold']}'><i class='fa fa-edit'></i>&#160;Edit</a></li>
+                                    <li><a class='dropdown-item edit-btn' href='iventoryEdit.php?id={$row['id']}'><i class='fa fa-edit'></i>&#160;Edit</a></li>
                                     <li><a class='dropdown-item' href='inventoryDelete.php?id={$row['id']}'><i class='fa fa-trash'></i>&#160;Delete</a></li>
                                 </ul>
                             </div>
