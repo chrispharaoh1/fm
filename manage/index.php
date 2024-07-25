@@ -1,4 +1,17 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "farm_management";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+//End of connection
 $curl = curl_init();
 
 curl_setopt_array($curl, [
@@ -39,7 +52,25 @@ if ($err) {
 ?>
 
 <?php
-  session_start();
+ // Fetch data
+$sql = "SELECT transaction_type, SUM(amount) as total_amount FROM financial_transactions GROUP BY transaction_type";
+$result = $conn->query($sql);
+
+$expenses = 0;
+$revenues = 0;
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        if ($row['transaction_type'] == 'expense') {
+            $expenses = $row['total_amount'];
+        } elseif ($row['transaction_type'] == 'revenue') {
+            $revenues = $row['total_amount'];
+        }
+    }
+} else {
+    echo "No data found";
+}
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,22 +134,88 @@ if ($err) {
       <div class="container-fluid">
 
 
-
+  <!-- Row for chart and weather -->
     <div class="row justify-content-center">
+      <!-- chart card -->
+
+
+
+
     <div class="col-md-8">
-            <div class="card weather-card">
-                <div class="card-body">
-                    <h5 class="card-title">Weather Information for Zomba</h5>
-                    <p class="card-text">Temperature: <?= $temp ?>°C</p>
-                    <p class="card-text">Humidity: <?= $humidity ?>%</p>
-                    <p class="card-text font-weight-bold">Suggestion: <?= $suggestion ?></p>
-                </div>
-            </div>
+    <div class="card weather-card">
+    <div class="chart-container">
+    <h3 style="text-align:center;"><u>Expenses and Revenue chart</u></h3>
+    <canvas id="financialChart"></canvas>
+    <button onclick="updateChart('bar')">Bar Chart</button>
+    <button onclick="updateChart('line')">Line Chart</button>
+    <button onclick="updateChart('pie')">Pie Chart</button>
+</div>
+
+<script>
+    const expenses = <?php echo $expenses; ?>;
+    const revenues = <?php echo $revenues; ?>;
+
+    const ctx = document.getElementById('financialChart').getContext('2d');
+    let chartType = 'bar'; // Default chart type
+    let financialChart = new Chart(ctx, {
+        type: chartType,
+        data: {
+            labels: ['Expenses', 'Revenues'],
+            datasets: [{
+                label: 'Amount',
+                data: [expenses, revenues],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    function updateChart(type) {
+        financialChart.destroy();
+        financialChart = new Chart(ctx, {
+            type: type,
+            data: {
+                labels: ['Expenses', 'Revenues'],
+                datasets: [{
+                    label: 'Amount',
+                    data: [expenses, revenues],
+                    backgroundColor: type === 'pie' ? ['rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)'] : ['rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: type !== 'pie' ? {
+                    y: {
+                        beginAtZero: true
+                    }
+                } : {}
+            }
+        });
+    }
+</script>
         </div>
+  </div>
+
+
+
+
+
+        <!-- weather card -->
         <div class="col-md-4">
             <div class="card weather-card">
                 <div class="card-body">
-                    <h5 class="card-title">Weather Information for Zomba</h5>
+                    <h3 class="card-title">Weather Information for Zomba</h3>
                     <p class="card-text">Temperature: <?= $temp ?>°C</p>
                     <p class="card-text">Humidity: <?= $humidity ?>%</p>
                     <p class="card-text font-weight-bold">Suggestion: <?= $suggestion ?></p>
