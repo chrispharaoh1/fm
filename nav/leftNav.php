@@ -8,10 +8,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+          <!-- <img src="../dist/img/avatar.png" class="img-circle elevation-2" alt="User Image"> -->
         </div>
         <div class="info">
-          <a href="#" class="d-block">Chris Pharaoh</a>
+          <a href="#" class="d-block"><h2>FMIS</h2></a>
         </div>
       </div>
 
@@ -36,7 +36,7 @@
 
           <li class="nav-header">NAVIGATION</li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link active">
+            <a href="index.php" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -45,18 +45,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="user.php" class="nav-link">
             <i class="fa fa-user" aria-hidden="true"></i>
               <p>
                 User Management
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
-            <i class="fa fa-file" aria-hidden="true"></i>
-              <p>
-                Logs
               </p>
             </a>
           </li>

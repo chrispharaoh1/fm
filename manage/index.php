@@ -1,4 +1,44 @@
 <?php
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+    CURLOPT_URL => "https://open-weather13.p.rapidapi.com/city/zomba/EN",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "GET",
+    CURLOPT_HTTPHEADER => [
+        "x-rapidapi-host: open-weather13.p.rapidapi.com",
+        "x-rapidapi-key: ebc49c9d63mshce19a6df52c6843p12f37bjsnc6b2da25ad19"
+    ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+    echo "cURL Error #:" . $err;
+} else {
+    $weather = json_decode($response, true);
+    $temp = intval(($weather['main']['temp']) - 32) * (5/9) ;
+    $humidity = $weather['main']['humidity'];
+    $suggestion = "";
+
+    if ($temp > 30) {
+        $suggestion = "It's hot, Make sure to water your crops frequently.";
+    } elseif ($temp < 0) {
+        $suggestion = "It's cold, Protect your livestocks from the cold.";
+    } else {
+        $suggestion = "The weather is moderate. Your crops should be doing well.";
+    }
+}
+?>
+
+<?php
   session_start();
 ?>
 <!DOCTYPE html>
@@ -9,7 +49,8 @@
   <title>Home</title>
 
   <!-- Google Font: Source Sans Pro -->
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
   <!-- IonIcons -->
@@ -60,11 +101,41 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="row">
 
-          <!-- /.col-md-6 -->
+
+
+    <div class="row justify-content-center">
+    <div class="col-md-8">
+            <div class="card weather-card">
+                <div class="card-body">
+                    <h5 class="card-title">Weather Information for Zomba</h5>
+                    <p class="card-text">Temperature: <?= $temp ?>°C</p>
+                    <p class="card-text">Humidity: <?= $humidity ?>%</p>
+                    <p class="card-text font-weight-bold">Suggestion: <?= $suggestion ?></p>
+                </div>
+            </div>
         </div>
-        <!-- /.row -->
+        <div class="col-md-4">
+            <div class="card weather-card">
+                <div class="card-body">
+                    <h5 class="card-title">Weather Information for Zomba</h5>
+                    <p class="card-text">Temperature: <?= $temp ?>°C</p>
+                    <p class="card-text">Humidity: <?= $humidity ?>%</p>
+                    <p class="card-text font-weight-bold">Suggestion: <?= $suggestion ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
       </div>
       <!-- /.container-fluid -->
     </div>

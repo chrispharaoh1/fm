@@ -32,7 +32,7 @@ $result = $conn->query($sql);
             color: red;
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +42,7 @@ $result = $conn->query($sql);
   <title>Home</title>
 
   <!-- Google Font: Source Sans Pro -->
-
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
   <!-- IonIcons -->

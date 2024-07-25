@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home</title>
 
-  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
@@ -250,6 +250,8 @@
 </div>
 <!-- ./wrapper -->
 
+    </script>
+
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>
@@ -263,5 +265,19 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard3.js"></script>
+
+<script src="../assets/js/jquery-3.7.0.js"></script>
+    <script src="../assets/js/jquery.dataTables.min.js"></script>
+
+    <script src="../assets/js/jquery-3.7.0.js"></script>
+    <script src="../assets/js/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/dataTables.bootstrap5.min.js"></script>
+
+    <script src="../assets/js/bootstrap.bundle2.min.js"></script>
+
+<script>
+        $(document).ready(function() {
+            $('#transactionsTable').DataTable();
+        });
 </body>
 </html>

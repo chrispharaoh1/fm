@@ -66,37 +66,31 @@
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" aria-labelledby="dropdownMenuButton">
         <div class="container">
             <div class="row">
-                <div class="col-6 col-md-4 dropdown-item">
+                <div class="col-6 col-md-4 dropdown-item" style="font-size:30px;">
                   <a href="crops.php">
                     <i class="fas fa-seedling"></i>
                     <span>Crops</span>
                   </a>
                 </div>
-                <div class="col-6 col-md-4 dropdown-item">
-                <a href="analysis.php">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Analysis</span>
-                </a>
-                </div>
-                <div class="col-6 col-md-4 dropdown-item">
+                <div class="col-6 col-md-4 dropdown-item" style="font-size:30px;">
                 <a href="iventory.php">
                     <i class="fas fa-boxes"></i>
                     <span>Iventory</span>
                 </a>
                 </div>
-                <div class="col-6 col-md-4 dropdown-item">
+                <div class="col-6 col-md-4 dropdown-item" style="font-size:30px;">
                 <a href="finance.php">
                     <i class="fas fa-coins"></i>
                     <span>Finance</span>
                 </a>
                 </div>
-                <div class="col-6 col-md-4 dropdown-item">
+                <div class="col-6 col-md-4 dropdown-item" style="font-size:30px;">
                 <a href="audit.php">
                     <i class="fas fa-file-alt"></i>
                     <span>Audit logs</span>
                 </a>
                 </div>
-                <div class="col-6 col-md-4 dropdown-item">
+                <div class="col-6 col-md-4 dropdown-item" style="font-size:30px;">
                 <a href="profile.php">
                     <i class="fas fa-user"></i>
                     <span>My profile</span>
