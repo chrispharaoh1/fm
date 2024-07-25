@@ -215,12 +215,51 @@ $conn->close();
         <div class="col-md-4">
             <div class="card weather-card">
                 <div class="card-body">
-                    <h3 class="card-title">Weather Information for Zomba</h3>
+                    <h3 style="text-align:center;">Weather Information for Zomba</h3>
                     <p class="card-text">Temperature: <?= $temp ?>°C</p>
                     <p class="card-text">Humidity: <?= $humidity ?>%</p>
                     <p class="card-text font-weight-bold">Suggestion: <?= $suggestion ?></p>
                 </div>
             </div>
+<!-- Card for budgets -->
+          <div class="card weather-card">
+          <h6 style="text-align: center;">Recent Budgets</h6>
+          <div class='table-responsive mt-3'>
+            <table id="budgetsTable" class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Budget Name</th>
+                  <th>Amount</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $conn = new mysqli('localhost', 'root', '', 'farm_management');
+                if ($conn->connect_error) {
+                  die("Connection failed: " . $conn->connect_error);
+                }
+
+                $result = $conn->query("SELECT * FROM budgets ORDER BY id DESC LIMIT 2");
+                while ($row = $result->fetch_assoc()) {
+                  echo "<tr>
+                          <td>{$row['budget_name']}</td>
+                          <td>{$row['amount']}</td>
+                          <td>{$row['start_date']}</td>
+                          <td>{$row['end_date']}</td>
+                        </tr>";
+                }
+
+                $conn->close();
+                ?>
+              </tbody>
+            </table>
+          </div>
+          </div>
+
+
+
         </div>
     </div>
 
