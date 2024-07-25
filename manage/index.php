@@ -37,8 +37,8 @@ if ($err) {
     echo "cURL Error #:" . $err;
 } else {
     $weather = json_decode($response, true);
-    $temp = intval(($weather['main']['temp']) - 32) * (5/9) ;
-    $humidity = $weather['main']['humidity'];
+    $temp =  25; //intval(($weather['main']['temp']) - 32) * (5/9) ;
+    $humidity = 53;//$weather['main']['humidity'];
     $suggestion = "";
 
     if ($temp > 30) {
@@ -138,17 +138,16 @@ $conn->close();
     <div class="row justify-content-center">
       <!-- chart card -->
 
-
-
-
     <div class="col-md-8">
     <div class="card weather-card">
     <div class="chart-container">
     <h3 style="text-align:center;"><u>Expenses and Revenue chart</u></h3>
     <canvas id="financialChart"></canvas>
+    <div class="btn-custom" style="margin-bottom: 60px; display: block; margin-left:auto; margin-right:auto;">
     <button onclick="updateChart('bar')">Bar Chart</button>
     <button onclick="updateChart('line')">Line Chart</button>
     <button onclick="updateChart('pie')">Pie Chart</button>
+    </div>
 </div>
 
 <script>
@@ -206,11 +205,6 @@ $conn->close();
 </script>
         </div>
   </div>
-
-
-
-
-
         <!-- weather card -->
         <div class="col-md-4">
             <div class="card weather-card">
@@ -223,7 +217,7 @@ $conn->close();
             </div>
 <!-- Card for budgets -->
           <div class="card weather-card">
-          <h6 style="text-align: center;">Recent Budgets</h6>
+          <h6 style="text-align: center;">Recent Budgets</h2>
           <div class='table-responsive mt-3'>
             <table id="budgetsTable" class="table table-striped table-bordered">
               <thead>
@@ -264,7 +258,64 @@ $conn->close();
     </div>
 
 
+    <div class="row justify-content-center">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">Inventory Usage Data</h2>
+            </div>
+            <div class="card-body">
+                <table id="inventoryTable" class="display table table-striped table-bordered" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Inventory Name</th>
+                            <th>Quantity Used</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "farm_management";
 
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+
+                        // SQL query to join inventory_usage and inventory tables
+                        $sql = "SELECT i.item_name, iu.quantity_used
+                                FROM inventory_usage iu
+                                JOIN inventory i ON iu.inventory_id = i.id
+                                ORDER BY iu.quantity_used DESC
+                                LIMIT 3;
+                                ";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $quantity_used = $row['quantity_used'];
+                                $arrow = $quantity_used > 0 ? '<span style="color: green;">&#9650;</span>' : '<span style="color: red;">&#9660;</span>';
+                                echo "<tr>
+                                        <td>{$row['item_name']}</td>
+                                        <td>{$quantity_used} {$arrow}</td>
+                                      </tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='2'>No data available</td></tr>";
+                        }
+
+                        $conn->close();
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </div>
 
 
 
@@ -286,10 +337,12 @@ $conn->close();
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?php
+
+
+<?php
     include '../nav/footer.php';  //Top navbar
   ?>
-</div>
+  </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
